@@ -20,7 +20,8 @@ class PropertyOffer(models.Model):
 
     def _compute_inverse_deadline(self):
         for record in self:
-            record.validity = record.date_deadline-record.create_date
+            # record.validity = record.date_deadline-record.create_date
+            record.validity = datetime.now()
 
     price = fields.Float()
     status = fields.Selection(selection=[("accepted","accepted"),("refused","Refused")],copy=False)

@@ -2,7 +2,6 @@ from calendar import month
 from copy import copy
 from datetime import date
 from email.policy import default
-import string
 from xmlrpc.client import DateTime
 from . import property_type
 from odoo import api,fields,models
@@ -51,7 +50,7 @@ class EstatePropert(models.Model):
         for record in self:
             x = 0
             for offer in record.offer_ids:
-                if not x or offer.price > x:
+                if offer.price > x:
                     x = offer.price
             record.best_price = x
         
