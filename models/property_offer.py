@@ -9,6 +9,12 @@ from odoo import api,fields,models
 class PropertyOffer(models.Model):
     _name = "estate.property.offer"
 
+    price = fields.Float()
+    status = fields.Selection(selection=[("accepted","accepted"),("refused","Refused")],copy=False)
+    partner_id = fields.Many2one ('res.partner', required=True)
+    validity = fields.Integer(string="Validity (Days)",default=7)
+    date_deadline = fields.Date(string="Deadline",compute="_compute_deadline",inverse="_compute_inverse_deadline")
+    property_id = fields.Many2one ('estate.properties', required=True)
 
     @api.depends("validity")
     def _compute_deadline(self):
@@ -20,15 +26,15 @@ class PropertyOffer(models.Model):
 
     def _compute_inverse_deadline(self):
         for record in self:
+            if record.create_date:
+                # record.validity = int(record.date_deadline-record.create_date)
+                record.validity = 4
+            else:
+                # record.validity = int(record.date_deadline-datetime.now())
+                record.validity = 4
+            
             # record.validity = record.date_deadline-record.create_date
-            record.validity = datetime.now()
-
-    price = fields.Float()
-    status = fields.Selection(selection=[("accepted","accepted"),("refused","Refused")],copy=False)
-    partner_id = fields.Many2one ('res.partner', required=True)
-    validity = fields.Integer(string="Validity (Days)",default=7)
-    date_deadline = fields.Date(string="Deadline",compute="_compute_deadline", inverse="_compute_inverse_deadline")
-    property_id = fields.Many2one ('estate.properties', required=True)
+            # record.validity = datetime.now()
 
             
     

@@ -33,7 +33,7 @@ class EstatePropert(models.Model):
         selection=[('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')])
     state = fields.Selection(default="new",
         selection=[('new', 'New'), ('offer_received', 'Offer Received'), ('offer_accept', 'Offer Accepted'), ('sold', 'Sold!'), ('cancel', 'Canceled')])
-    active = fields.Boolean()
+    active = fields.Boolean(default="True")
     best_price = fields.Float(compute="_compute_best_price")
     total_area = fields.Float(compute="_compute_total_area")
     
