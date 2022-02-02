@@ -87,8 +87,9 @@
                 <field name="name"/>
                 <field name="property_type_id"/>
                 <field name="postcode"/>
-                <field name="excepted_price"/>               
-                <filter string="Available" name="available" domain="['|', ('state', '=', 'new'), ('state', '=', 'received')]"/>
+                <field name="excepted_price"/>
+                <filter string="Have garden" name="hasgarden" domain="[('garden','=','True')]"/>
+                <filter name="garage" string="Have Garage" domain="[('garage', '=', 'True')]" />
                 <group string="Group By">
                     <filter string="Postcode" name="postcode" context="{'group_by':'postcode'}"/>
                     <filter string="Garden" name="garden" context="{'group_by':'garden'}"/>

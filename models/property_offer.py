@@ -1,6 +1,6 @@
 from copy import copy
 from dateutil.relativedelta import relativedelta
-from datetime import datetime
+from datetime import date, datetime
 
 from odoo import api,fields,models
 
@@ -25,17 +25,11 @@ class PropertyOffer(models.Model):
     def _compute_inverse_deadline(self):
         for record in self:
             if record.create_date:
-                # record.validity = int(record.date_deadline-record.create_date)
-                import pdb
-                pdb.set_trace()
                 diff = datetime.strptime(record.date_deadline.strftime('%Y-%m-%d'), '%Y-%m-%d') - record.create_date
-                record.validity = diff.days
+                record.validity = diff.days + 1
             else:
-                # record.validity = int(record.date_deadline-datetime.now())
-                record.validity = 4
+                record.validity = datetime.strptime(record.date_deadline.strftime('%Y-%m-%d'), '%Y-%m-%d') - datetime.todays
             
-            # record.validity = record.date_deadline-record.create_date
-            # record.validity = datetime.now()
 
             
     
