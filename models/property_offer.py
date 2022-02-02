@@ -14,6 +14,10 @@ class PropertyOffer(models.Model):
     date_deadline = fields.Date(string="Deadline",compute="_compute_deadline", inverse="_compute_inverse_deadline")
     property_id = fields.Many2one ('estate.properties', required=True)
 
+    _sql_constraints = [
+        ('ceck_excepted_price', 'check(excepted_price > 0)', "Excepted price must be Positive.")
+    ]
+
     @api.depends("validity", "create_date")
     def _compute_deadline(self):
         for record in self:

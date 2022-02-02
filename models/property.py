@@ -6,11 +6,6 @@ class EstatePropert(models.Model):
 
 
 
-    property_type_id = fields.Many2one("estate.property.type", string="Property Type")
-    buyer_id = fields.Many2one("res.partner", string="Buyer", copy=False)
-    salesperson_id = fields.Many2one("res.users", string="Salesman", default=lambda self: self.env.user)
-    tag_ids = fields.Many2many("estate.property.tag")
-    offer_ids = fields.One2many("estate.property.offer", "property_id")
     name = fields.Char(default="Unknow",required=True,string="Title")
     description = fields.Text(string="Description")
     postcode = fields.Char(string="PostCode")
@@ -30,6 +25,17 @@ class EstatePropert(models.Model):
     active = fields.Boolean(default="True")
     best_price = fields.Float(compute="_compute_best_price")
     total_area = fields.Float(compute="_compute_total_area")
+
+    property_type_id = fields.Many2one("estate.property.type", string="Property Type")
+    buyer_id = fields.Many2one("res.partner", string="Buyer", copy=False)
+    salesperson_id = fields.Many2one("res.users", string="Salesman", default=lambda self: self.env.user)
+    tag_ids = fields.Many2many("estate.property.tag")
+    offer_ids = fields.One2many("estate.property.offer", "property_id")
+
+    _sql_constraints = [
+        ('ceck_excepted_price', 'check(excepted_price > 0)', "Excepted price must be Positive."),
+        ('ceck_selling_price', 'check(selling_price > 0)', "Selling price must be Positive.")
+    ]
     
     
 
