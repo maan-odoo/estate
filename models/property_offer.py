@@ -1,9 +1,7 @@
 from copy import copy
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
-from email.policy import default
-from sqlite3 import Date
-import string
+
 from odoo import api,fields,models
 
 class PropertyOffer(models.Model):
@@ -13,10 +11,10 @@ class PropertyOffer(models.Model):
     status = fields.Selection(selection=[("accepted","accepted"),("refused","Refused")],copy=False)
     partner_id = fields.Many2one ('res.partner', required=True)
     validity = fields.Integer(string="Validity (Days)",default=7)
-    date_deadline = fields.Date(string="Deadline",compute="_compute_deadline",inverse="_compute_inverse_deadline")
+    date_deadline = fields.Date(string="Deadline",compute="_compute_deadline", inverse="_compute_inverse_deadline")
     property_id = fields.Many2one ('estate.properties', required=True)
 
-    @api.depends("validity")
+    @api.depends("validity", "create_date")
     def _compute_deadline(self):
         for record in self:
             if record.create_date:
@@ -28,7 +26,10 @@ class PropertyOffer(models.Model):
         for record in self:
             if record.create_date:
                 # record.validity = int(record.date_deadline-record.create_date)
-                record.validity = 4
+                import pdb
+                pdb.set_trace()
+                diff = datetime.strptime(record.date_deadline.strftime('%Y-%m-%d'), '%Y-%m-%d') - record.create_date
+                record.validity = diff.days
             else:
                 # record.validity = int(record.date_deadline-datetime.now())
                 record.validity = 4
