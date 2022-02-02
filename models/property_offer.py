@@ -28,7 +28,7 @@ class PropertyOffer(models.Model):
                 diff = datetime.strptime(record.date_deadline.strftime('%Y-%m-%d'), '%Y-%m-%d') - record.create_date
                 record.validity = diff.days + 1
             else:
-                record.validity = datetime.strptime(record.date_deadline.strftime('%Y-%m-%d'), '%Y-%m-%d') - datetime.todays
+                record.validity = (datetime.strptime(record.date_deadline.strftime('%Y-%m-%d'), '%Y-%m-%d') - datetime.today())+1
             
 
             

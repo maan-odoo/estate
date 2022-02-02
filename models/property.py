@@ -1,11 +1,5 @@
-from calendar import month
-from copy import copy
-from datetime import date
-from email.policy import default
-from xmlrpc.client import DateTime
-from . import property_type
 from odoo import api,fields,models
-from odoo.tools.date_utils import end_of
+from odoo.exceptions import UserError
 
 class EstatePropert(models.Model):
     _name = "estate.properties"
@@ -62,4 +56,18 @@ class EstatePropert(models.Model):
         else:
             self.garden_area = 0
             self.garden_orientation = None
+
+    def sold_property(self):
+        for record in self:
+            if record.state == 'canceled':
+                raise UserError("Canceled properties cannot be sold.")
+            record.state = "sold"
+        return True
+
+    def cancel_property(self):
+        for record in self:
+            if record.state == 'sold':
+                raise UserError("Sold properties cannot be canceled.")
+            record.state = "cancel"
+        return True
         

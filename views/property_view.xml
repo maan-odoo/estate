@@ -28,6 +28,8 @@
         <field name="arch" type="xml">
             <form string="Estate Property">
                 <header>
+                    <button name="sold_property" type="object" string="SOLD"/>
+                    <button name="cancel_property" type="object" string="CANCEL"/>
                 </header>
                 <sheet>
                     <div>
@@ -90,6 +92,12 @@
                 <field name="excepted_price"/>
                 <filter string="Have garden" name="hasgarden" domain="[('garden','=','True')]"/>
                 <filter name="garage" string="Have Garage" domain="[('garage', '=', 'True')]" />
+                <separator />
+                <filter name="newstate" string="New State" domain="[('state', '=', 'new')]" />
+                <filter name="receivestate" string="Offer Receive State" domain="[('state', '=', 'offer_received')]" />
+                <filter name="acceptstate" string="Offer Accept State" domain="[('state', '=', 'offer_accept')]" />
+                <filter name="soldtate" string="Property solded" domain="[('state', '=', 'sold')]" />
+                <filter name="cancelstate" string="Offer calcelled" domain="[('state', '=', 'cancele')]" />
                 <group string="Group By">
                     <filter string="Postcode" name="postcode" context="{'group_by':'postcode'}"/>
                     <filter string="Garden" name="garden" context="{'group_by':'garden'}"/>
