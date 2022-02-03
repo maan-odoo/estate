@@ -18,6 +18,14 @@ class PropertyOffer(models.Model):
         ('ceck_excepted_price', 'check(excepted_price > 0)', "Excepted price must be Positive.")
     ]
 
+    @api.constrains("price")
+    def _check_price(self):
+        for record in self:
+            x = record.property_id.excepted_price
+            c = (x*90)/100
+
+            if not record.price>=c:
+                raise UserError("The offer must be 90% of excepted Price")
     # @api.model
     # def create(self, vals):
     #     self.property_id.state = "offer_received"
