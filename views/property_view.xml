@@ -114,20 +114,48 @@
         </field>
     </record>
 
-     <record id="estate_property_view_search" model="ir.ui.view">
-        <field name="name">estate.properties.search</field>
+    <record id="estate_property_view_graph" model="ir.ui.view">
+        <field name="name">estate.properties.graph</field>
         <field name="model">estate.properties</field>
         <field name="arch" type="xml">
             <graph string="Price"> 
+                <field name="name" />
                 <field name="excepted_price" />
             </graph>
         </field>
-
     </record>
+
+
+    <record id="estate_property_view_pivot" model="ir.ui.view">
+        <field name="name">estate.properties.pivot</field>
+        <field name="model">estate.properties</field>
+        <field name="arch" type="xml">
+            <pivot string="Timesheet">
+                <field name="name" type="row"/>
+                <field name="date_avalibility" interval="month" type="col"/>
+                <field name="excepted_price" type="measure" widget="float_time"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- <record id="estate_property_view_activity" model="ir.ui.view">
+        <field name="name">estate.properties.activity</field>
+        <field name="model">estate.properties</field>
+        <field name="arch" type="xml">
+            <activity string="Activity">
+                <templates>
+                    <div t-name="activity-box">
+
+                    </div>
+                </templates>
+            </activity>
+        </field>
+    </record> -->
+
     <record model="ir.actions.act_window" id="action_property">
    		    <field name="name">Property</field>
             <field name="res_model">estate.properties</field>
- 		    <field name="view_mode">tree,form,calendar,graph</field>
+ 		    <field name="view_mode">tree,form,calendar,graph,pivot</field>
  	</record>
 </odoo>
 

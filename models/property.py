@@ -53,6 +53,13 @@ class EstatePropert(models.Model):
                 if offer.price > x:
                     x = offer.price
             record.best_price = x
+    
+    # @api.model
+    # def unlink(self, vals):
+    #     if self.state in ("new","cancel"):
+    #         raise UserError("New or Cancelled Properties not Delet")
+
+    #     return super().create(vals)
         
     @api.onchange("garden")
     def _onchange_garden(self):

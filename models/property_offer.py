@@ -1,7 +1,7 @@
-from copy import copy
+
 from dateutil.relativedelta import relativedelta
 from datetime import date, datetime
-
+from odoo.exceptions import UserError
 from odoo import api,fields,models
 
 class PropertyOffer(models.Model):
@@ -17,6 +17,12 @@ class PropertyOffer(models.Model):
     _sql_constraints = [
         ('ceck_excepted_price', 'check(excepted_price > 0)', "Excepted price must be Positive.")
     ]
+
+    # @api.model
+    # def create(self, vals):
+    #     self.property_id.state = "offer_received"
+
+    #     return super().create(vals)
 
     @api.depends("validity", "create_date")
     def _compute_deadline(self):
@@ -34,7 +40,21 @@ class PropertyOffer(models.Model):
             else:
                 record.validity = (datetime.strptime(record.date_deadline.strftime('%Y-%m-%d'), '%Y-%m-%d') - datetime.today())+1
             
+    def action_accept(self):
+        for record in self:
+            if record.status == 'refused':
+                raise UserError("Refused offer cannot be accepted.")
+            record.status = "accepted"
+            record.property_id.buyer_id = record.partner_id
+            record.property_id.selling_price = record.price
+        return True
 
+    def action_refuse(self):
+        for record in self:
+            if record.status == 'accepted':
+                raise UserError("Accepted offer cannot be refused.")
+            record.status = "refused"
+        return True
             
     
             
