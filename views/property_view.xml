@@ -113,10 +113,21 @@
             </search>
         </field>
     </record>
+
+     <record id="estate_property_view_search" model="ir.ui.view">
+        <field name="name">estate.properties.search</field>
+        <field name="model">estate.properties</field>
+        <field name="arch" type="xml">
+            <graph string="Price"> 
+                <field name="excepted_price" />
+            </graph>
+        </field>
+
+    </record>
     <record model="ir.actions.act_window" id="action_property">
    		    <field name="name">Property</field>
             <field name="res_model">estate.properties</field>
- 		    <field name="view_mode">tree,form,calendar</field>
+ 		    <field name="view_mode">tree,form,calendar,graph</field>
  	</record>
 </odoo>
 
