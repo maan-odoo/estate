@@ -26,11 +26,11 @@ class PropertyOffer(models.Model):
 
             if not record.price>=c:
                 raise UserError("The offer must be 90% of excepted Price")
+   
     # @api.model
     # def create(self, vals):
-    #     self.property_id.state = "offer_received"
-
-    #     return super().create(vals)
+        
+    #     return super(PropertyOffer, self).create(vals)
 
     @api.depends("validity", "create_date")
     def _compute_deadline(self):
