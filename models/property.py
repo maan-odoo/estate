@@ -3,6 +3,8 @@ from odoo.exceptions import UserError
 
 class EstatePropert(models.Model):
     _name = "estate.properties"
+    _description = "This is state core model"
+    _order = "id desc"
 
 
 
@@ -21,7 +23,7 @@ class EstatePropert(models.Model):
     garden_orientation = fields.Selection(string="Garden Orientation",
         selection=[('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')])
     state = fields.Selection(default="new",
-        selection=[('new', 'New'), ('offer_received', 'Offer Received'), ('offer_accept', 'Offer Accepted'), ('sold', 'Sold!'), ('cancel', 'Canceled')])
+        selection=[('new', 'New'), ('offer_received', 'Offer Received'), ('offer_accept', 'Offer Accepted'), ('sold', 'Sold'), ('cancel', 'Canceled')])
     active = fields.Boolean(default="True")
     best_price = fields.Float(compute="_compute_best_price")
     total_area = fields.Float(compute="_compute_total_area")

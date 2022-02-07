@@ -21,10 +21,12 @@
         <field name="name">estate.properties.form</field>
         <field name="model">estate.properties</field>
         <field name="arch" type="xml">
-            <form string="Estate Property">
+            <form>
                 <header>
                     <button name="sold_property" type="object" string="SOLD"/>
                     <button name="cancel_property" type="object" string="CANCEL"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accept,sold"/>
+                    <!-- <field name="state" widget="statusbar" statusbar_visible="new,confirm,cancel"/> -->
                 </header>
                 <sheet>
                     <div>
@@ -33,11 +35,11 @@
                         </h1>
                     </div>
                     <div>
-                        <field name="tag_ids" widget="many2many_tags"/>
+                        <field name="tag_ids" widget="many2many_tags"  options="{'color_field': 'color'}"/>
                     </div>
                     <group>
                         <group>
-                            <field name="state"/>
+                            <!-- <field name="state"/> -->
                             <field name="property_type_id"/>
                             <field name="postcode"/>
                             <field name="date_avalibility"/>
@@ -76,6 +78,7 @@
             </form>
         </field>
     </record>
+    
      
     <record id="estate_property_view_calendar" model="ir.ui.view">
         <field name="name">estate.properties.calendar</field>
