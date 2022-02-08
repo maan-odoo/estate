@@ -17,22 +17,15 @@ class PropertyOffer(models.Model):
     property_id = fields.Many2one ('estate.properties', required=True)
 
     _sql_constraints = [
-        ('ceck_excepted_price', 'check(excepted_price > 0)', "Excepted price must be Positive.")
-    ]
+        ('ceck_excepted_price', 'check(excepted_price > 0)', "Excepted price must be Positive.")]
 
     @api.constrains("price")
     def _check_price(self):
         for record in self:
             x = record.property_id.excepted_price
             c = (x*90)/100
-
             if not record.price>=c:
                 raise UserError("The offer must be 90% of excepted Price")
-   
-    # @api.model
-    # def create(self, vals):
-        
-    #     return super(PropertyOffer, self).create(vals)
 
     @api.depends("validity", "create_date")
     def _compute_deadline(self):

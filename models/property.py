@@ -60,7 +60,6 @@ class EstatePropert(models.Model):
         for record in self:
             if record.state in ("new","cancel"):
                 raise UserError("You can't Delete new or calcelled Properties")
-
         super(EstatePropert,self).unlink()
         
     @api.onchange("garden")
@@ -74,7 +73,7 @@ class EstatePropert(models.Model):
 
     def sold_property(self):
         for record in self:
-            if record.state == 'canceled':
+            if record.state == 'cancel':
                 raise UserError("Canceled properties cannot be sold.")
             record.state = "sold"
         return True

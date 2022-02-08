@@ -10,5 +10,5 @@ class AsignBuyer(models.TransientModel):
         Session = self.env['estate.properties']
         ids = self.env.context.get('active_ids')
         sessions = Session.browse(ids)
-        sessions.write({'buyer_id': self.instructor_id})
+        sessions.write({'buyer_id': self.buyer_id})
         return True
