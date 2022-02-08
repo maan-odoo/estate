@@ -13,6 +13,7 @@
         "views/property_tag_view.xml",
         "views/property_offer_view.xml",
         "views/estate_menus.xml",
+        "wizard/asign_buyer_view.xml",
         "security/ir.model.access.csv"
     ],
     'demo': [
