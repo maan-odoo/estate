@@ -4,15 +4,15 @@
         <field name="name">estate.list.view</field>
         <field name="model">estate.properties</field>
         <field name="arch" type="xml">
-        <tree>
+        <tree decoration-success="state in ('offer_received','offer_accept')" decoration-bf="state=='offer_accept'" decoration-muted="state=='sold'">
              <field name="name" />
               <field name="property_type_id"/>
+              <field name="state"/>
              <field name="postcode" />
              <field name="bedrooms" />
              <field name="living_area" />
              <field name="excepted_price" />
              <field name="selling_price" />
-             <field name="date_avalibility" />
             <field name="total_area" />
         </tree>
         </field>
@@ -59,13 +59,13 @@
                                 <field name="facades"/>
                                 <field name="garage"/>
                                 <field name="garden"/>
-                                <field name="garden_area"/>
-                                <field name="garden_orientation"/>
+                                <field name="garden_area" attrs="{'invisible': [('garden', '=', False)]}"/>
+                                <field name="garden_orientation" attrs="{'invisible': [('garden', '=', False)]}"/>
                                 <field name="total_area" />
                             </group>                         
                         </page>
-                        <page string="Offers">
-                            <field name="offer_ids"/>                         
+                        <page string="Offers" >
+                            <field name="offer_ids" attrs="{'readonly': [('state', 'in', ('offer_accept','sold','cancel'))]}"/>                         
                         </page>
                         <page string="Other Info">
                             <group>
@@ -101,6 +101,8 @@
                 <field name="property_type_id"/>
                 <field name="postcode"/>
                 <field name="excepted_price"/>
+                <filter string="Avaliable" name="avaliable" domain="[('garden','=','True')]"/>
+                <separator />
                 <filter string="Have garden" name="hasgarden" domain="[('garden','=','True')]"/>
                 <filter name="garage" string="Have Garage" domain="[('garage', '=', 'True')]" />
                 <separator />
