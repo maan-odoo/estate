@@ -20,6 +20,11 @@ class PropertyOffer(models.Model):
     _sql_constraints = [
         ('ceck_excepted_price', 'check(excepted_price > 0)', "Excepted price must be Positive.")]
 
+    @api.model
+    def create(self, vals):
+        self.env['estate.properties'].browse(vals['property_id']).state = "offer_received"
+        return super(PropertyOffer, self).create(vals)
+
     # @api.depends("property_id.property_type_id")
     # def _find_propertytype(self):
     #     for record in self:
@@ -64,6 +69,10 @@ class PropertyOffer(models.Model):
                 raise UserError("Accepted offer cannot be refused.")
             record.status = "refused"
         return True
+
+
+class ResUserInherit(models.Model):
+    _inherit = "res.users"
             
     
             

@@ -26,7 +26,7 @@
                     <button name="sold_property" type="object" string="SOLD"/>
                     <button name="cancel_property" type="object" string="CANCEL"/>
                     <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accept,sold"/>
-                    <!-- <field name="state" widget="statusbar" statusbar_visible="new,confirm,cancel"/> -->
+            
                 </header>
                 <sheet>
                     <div>
