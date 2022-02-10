@@ -6,14 +6,30 @@
         <field name="arch" type="xml">
             <form>
                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="action_offer_count_btn"
+                                    type="object" icon="fa-bars"
+                                    attrs="{'invisible': [('offer_count', '=', 0)]}">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="offer_count"/>
+                                    </span>
+                                    <span class="o_stat_text">
+                                        Offers
+                                    </span>
+                                </div>
+                            </button>
+                     </div>
                     <div class="oe_title">
                         <h1><field name="name" /></h1>
                         <!-- <field name="sequence" widget="handle" /> -->
                     </div>
+                    
                     <field name="property_ids">
-                        <tree string="Properties" editable="bottom">
+                        <tree string="Properties">
                             <field name="name"/>
                             <field name="postcode"/>
+                            
                             <field name="excepted_price"/>
                         </tree>
                     </field>
@@ -27,6 +43,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
+                <field name="offer_count" />
                 <field name="sequence" widget="handle" />
             </tree>
         </field>

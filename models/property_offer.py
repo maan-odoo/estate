@@ -15,10 +15,16 @@ class PropertyOffer(models.Model):
     validity = fields.Integer(string="Validity (Days)",default=7)
     date_deadline = fields.Date(string="Deadline",compute="_compute_deadline", inverse="_compute_inverse_deadline")
     property_id = fields.Many2one ('estate.properties', required=True)
-
+    property_type_id = fields.Many2one('estate.property.type', related="property_id.property_type_id")
+    
     _sql_constraints = [
         ('ceck_excepted_price', 'check(excepted_price > 0)', "Excepted price must be Positive.")]
 
+    # @api.depends("property_id.property_type_id")
+    # def _find_propertytype(self):
+    #     for record in self:
+    #         record.property_type_id = record.property_id.property_type_id
+    
     @api.constrains("price")
     def _check_price(self):
         for record in self:

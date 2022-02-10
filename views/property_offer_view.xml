@@ -9,7 +9,7 @@
                 <field name="partner_id"/>
                 <button name="action_accept" type="object" icon="fa-check" attrs="{'invisible': [('status', '!=', False)]}"/>
                 <button name="action_refuse" type="object" icon="fa-times" attrs="{'invisible': [('status', '!=', False)]}"/>
-                <field name="status" invisible=1/>
+                <field name="status" invisible="True"/>
             </tree>
         </field>
     </record>

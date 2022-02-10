@@ -64,7 +64,7 @@
                                 <field name="total_area" />
                             </group>                         
                         </page>
-                        <page string="Offers" >
+                        <page string="Offers"  editable="bottom" >
                             <field name="offer_ids" attrs="{'readonly': [('state', 'in', ('offer_accept','sold','cancel'))]}"/>                         
                         </page>
                         <page string="Other Info">
@@ -101,7 +101,8 @@
                 <field name="property_type_id"/>
                 <field name="postcode"/>
                 <field name="excepted_price"/>
-                <filter string="Avaliable" name="avaliable" domain="[('garden','=','True')]"/>
+                <field name="living_area"  filter_domain="[('living_area', '&gt;', self)]"/>
+                <!-- <filter string="Avaliable" name="avaliable" domain="[('garden','=','True')]"/> -->
                 <separator />
                 <filter string="Have garden" name="hasgarden" domain="[('garden','=','True')]"/>
                 <filter name="garage" string="Have Garage" domain="[('garage', '=', 'True')]" />
