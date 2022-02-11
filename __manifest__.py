@@ -8,6 +8,7 @@
     'website': 'https://www.odoo.com',
     'depends': [],
     'data': [
+        "views/res_user_view.xml",
         "views/property_view.xml",
         "views/property_type_view.xml",
         "views/property_tag_view.xml",
