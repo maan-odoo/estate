@@ -17,8 +17,8 @@ class PropertyOffer(models.Model):
     property_id = fields.Many2one ('estate.properties', required=True)
     property_type_id = fields.Many2one('estate.property.type', related="property_id.property_type_id")
     
-    _sql_constraints = [
-        ('ceck_excepted_price', 'check(excepted_price > 0)', "Excepted price must be Positive.")]
+    # _sql_constraints = [
+    #     ('ceck_excepted_price', 'check(excepted_price > 0)', "Excepted price must be Positive.")]
 
     @api.model
     def create(self, vals):

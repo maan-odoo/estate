@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
         <tree decoration-success="state in ('offer_received','offer_accept')" decoration-bf="state=='offer_accept'" decoration-muted="state=='sold'" decoration-danger="state=='cancel'">
              <field name="name" />
-              <field name="property_type_id"/>
+              <field name="property_type_id" options="{'no_create': True, 'no_open': True}"/>
               <field name="state"/>
              <field name="postcode" />
              <field name="bedrooms" />

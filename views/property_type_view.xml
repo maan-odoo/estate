@@ -29,7 +29,6 @@
                         <tree string="Properties">
                             <field name="name"/>
                             <field name="postcode"/>
-                            
                             <field name="excepted_price"/>
                         </tree>
                     </field>
