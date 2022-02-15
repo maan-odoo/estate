@@ -26,7 +26,6 @@
                     <button name="sold_property" type="object" string="SOLD" attrs="{'invisible': [('state', 'in', ('sold','cancel'))]}" />
                     <button name="cancel_property" type="object" string="CANCEL" attrs="{'invisible': [('state', 'in', ('sold','cancel'))]}"/>
                     <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accept,sold"/>
-            
                 </header>
                 <sheet>
                     <div>

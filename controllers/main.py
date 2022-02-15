@@ -1,5 +1,5 @@
 from urllib import response
-from odoo  import http 
+from odoo import http 
 from odoo.http import request
 
 
@@ -19,6 +19,15 @@ class RealEstate(http.Controller):
 
     @http.route('/property',auth="user",website="True")
     def showProperty(self,**kw):
-        return request.render("estate.property_template",{})
+        properties = request.env['estate.properties'].search([])
+        return request.render("estate.property_template",{
+            'properties':properties,
+        })
+
+    @http.route('/property_details/<model("estate.properties"):property>', auth="user", website=True)
+    def property_details(self, property=None, **kw):
+        return request.render("estate.property_detail_template", {
+            'property': property,
+        })
 
         

@@ -6,11 +6,119 @@
 
     <template id="property_template" name="Property List">
         <t t-call="website.layout">
-           <span style="color:red;">Hello World</span>
-            <div t-foreach="properties" t-as="p">
-                <span t-field="p.name"/>
-                <span style="color:red;">Hello World</span>
+        <t t-set="sr_no" t-value="1"/>
+            <table class="container mt-5 table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Postcode</th>
+                        <th scope="col">State</th>
+                        <th scope="col">Expected price</th>
+                        <th scope="col">Salesman</th>
+                     </tr>
+                </thead>
+                
+                <tbody t-foreach="properties" t-as="p">
+                   <tr>
+                        <td scope="row"> <t t-out="sr_no"/>  <t t-set="sr_no" t-value="sr_no+1"/></td>
+                        <td><a t-attf-href="/property_details/#{p.id}"><span t-field="p.name"/> </a> </td>
+                        <td> <span t-field="p.property_type_id"/> </td>
+                        <td> <span t-field="p.postcode"/> </td>
+                        <td> <span t-field="p.state"/> </td>
+                        <td> <span t-field="p.excepted_price"/> </td> 
+                        <td> <span t-field="p.salesperson_id"/> </td> 
+                    </tr> 
+                </tbody>
+            </table>
+        </t>
+    </template>
+    <template id="property_detail_template" name="template_Property_Details">
+        <t t-call="website.layout">
+            <div class="container row">
+            <div class="col-6 col-sm-12">
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-3 col-form-label">Name</label>
+                    <div class="col-9">
+                        <span class="form-control-plaintext" t-field="property.name"/>
+                    </div>
+                </div>
 
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-3 col-form-label">Post Code</label>
+                    <div class="col-9">
+                        <span class="form-control-plaintext" t-field="property.postcode"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-3 col-form-label">Description</label>
+                    <div class="col-9">
+                        <span class="form-control-plaintext" t-field="property.description"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-3 col-form-label">Avaliable Date</label>
+                    <div class="col-9">
+                        <span class="form-control-plaintext" t-field="property.date_avalibility"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-3 col-form-label">Excepted price</label>
+                    <div class="col-9">
+                        <span class="form-control-plaintext" t-field="property.excepted_price"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-3 col-form-label">No of Bedrooms</label>
+                    <div class="col-9">
+                        <span class="form-control-plaintext" t-field="property.bedrooms"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-sm-12">
+
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-3 col-form-label">State</label>
+                    <div class="col-9">
+                        <span class="form-control-plaintext" t-field="property.state"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-3 col-form-label">Property Type</label>
+                    <div class="col-9">
+                        <span class="form-control-plaintext" t-field="property.property_type_id"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-3 col-form-label">Salesman</label>
+                    <div class="col-9">
+                        <span class="form-control-plaintext" t-field="property.salesperson_id"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-3 col-form-label">Living Area</label>
+                    <div class="col-9">
+                        <span class="form-control-plaintext" t-field="property.living_area"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-3 col-form-label">Best Price</label>
+                    <div class="col-9">
+                        <span class="form-control-plaintext" t-field="property.best_price"/>
+                    </div>
+                </div>
+                </div>
+
+                
             </div>
         </t>
     </template>
