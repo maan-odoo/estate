@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="first_template">
+        <span style="color:red;">Hello World</span>
+    </template>
+
+    <template id="property_template" name="Property List">
+        <t t-call="website.layout">
+           <span style="color:red;">Hello World</span>
+            <div t-foreach="properties" t-as="p">
+                <span t-field="p.name"/>
+                <span style="color:red;">Hello World</span>
+
+            </div>
+        </t>
+    </template>
+</odoo>

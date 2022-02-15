@@ -9,6 +9,7 @@
     'depends': [],
     'data': [
          "security/estate_security.xml",
+        "views/estate_template.xml",
         "views/res_user_view.xml",
         "views/property_view.xml",
         "views/property_type_view.xml",
